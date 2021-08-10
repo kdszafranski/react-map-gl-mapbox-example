@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import ReactMapGL from 'react-map-gl';
+import ReactMapGL, {Marker} from 'react-map-gl';
 
 const MAPBOX_TOKEN = 'pk.eyJ1Ijoia2RzemFmcmFuc2tpIiwiYSI6ImNrczZhYXoxOTAwcnIydXJtbDlxZnFjenIifQ.uLDUhtEZC6zBliqNGeduTg'; // Set your mapbox token here
 
@@ -17,9 +17,13 @@ function App() {
     <ReactMapGL
       {...viewport}
       onViewportChange={nextViewport => setViewport(nextViewport)}
-      mapStyle="mapbox://styles/mapbox/dark-v9"
+      // mapStyle="mapbox://styles/mapbox/dark-v9"
       mapboxApiAccessToken={MAPBOX_TOKEN}
-    />
+    >
+      <Marker latitude={37.78} longitude={-122.41} offsetLeft={-20} offsetTop={-10}>
+        <div className="marker">You are here</div>
+      </Marker>
+    </ReactMapGL>
   );
 }
 
