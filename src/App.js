@@ -1,17 +1,31 @@
 import { useState } from 'react';
 import ReactMapGL, {Marker} from 'react-map-gl';
 
-const MAPBOX_TOKEN = ''; // Set your mapbox token here
+const MAPBOX_TOKEN = 'pk.eyJ1Ijoia2RzemFmcmFuc2tpIiwiYSI6ImNrczZhNGM0NzA4MG0yb210enlhOWkxaHkifQ.GEhDTku0VpkCA5wdnwDBvA'; // Set your mapbox token here
 
 function App() {
   
   const [viewport, setViewport] = useState({
     width: 400,
     height: 400,
-    latitude: 37.7577,
-    longitude: -122.4376,
+    latitude: 44.9778,
+    longitude: -93.2650,
     zoom: 8
   });
+
+  let [markers, setMarkers] = useState([
+    {
+      lat: 44.9,
+      long: -93.2,
+      text: 'thing one',
+    },
+    {
+      lat: 44.8,
+      long: -93.2,
+      text: 'thing two',
+    },
+  ]);
+  
 
   return (
     <ReactMapGL
@@ -20,9 +34,19 @@ function App() {
       // mapStyle="mapbox://styles/mapbox/dark-v9"
       mapboxApiAccessToken={MAPBOX_TOKEN}
     >
-      <Marker latitude={37.78} longitude={-122.41} offsetLeft={-20} offsetTop={-10}>
-        <div className="marker">You are here</div>
-      </Marker>
+        {markers.map( (item, index) => {
+          return (
+            <Marker key={index}
+              latitude={item.lat} 
+              longitude={item.long} 
+              offsetLeft={-20} 
+              offsetTop={-10}
+            >
+              <div className="marker">{item.text}</div>
+            </Marker>
+          )
+        })}
+      
     </ReactMapGL>
   );
 }
